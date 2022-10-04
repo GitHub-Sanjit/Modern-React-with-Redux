@@ -8,6 +8,12 @@ const App = () => {
   return (
     <div className="ui container comments">
       <ApprovalCard>
+        <div>
+          <h4>Warning!</h4>
+          Are You Sure You want to Do This
+        </div>
+      </ApprovalCard>
+      <ApprovalCard>
         <CommentDetail
           avatar={faker.image.avatar()}
           author={faker.name.firstName()}
