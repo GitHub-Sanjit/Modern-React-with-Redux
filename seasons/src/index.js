@@ -4,7 +4,7 @@ import SeasonDisplay from "./SeasonDisplay";
 import Spinner from "./Spinner";
 
 class App extends React.Component {
-  state = { lat: null, errorMessage: "" };
+  state = { lat: null, errorMessage: "", time: "" };
 
   componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
@@ -12,6 +12,10 @@ class App extends React.Component {
 
       (err) => this.setState({ errorMessage: err.message })
     );
+
+    setInterval(() => {
+      this.setState({ time: new Date().toLocaleTimeString() });
+    }, 1000);
   }
 
   renderContent() {
@@ -19,7 +23,12 @@ class App extends React.Component {
       return <div>Error: {this.state.errorMessage}</div>;
     }
     if (!this.state.errorMessage && this.state.lat) {
-      return <SeasonDisplay lat={this.state.lat}></SeasonDisplay>;
+      return (
+        <SeasonDisplay
+          lat={this.state.lat}
+          time={this.state.time}
+        ></SeasonDisplay>
+      );
     }
     return (
       <div>
@@ -29,11 +38,7 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div className="border red">
-        {this.renderContent()}
-      </div>
-    )
+    return <div className="border red">{this.renderContent()}</div>;
   }
 }
 
