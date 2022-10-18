@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Dropdown from "./components/Dropdown";
+import Header from "./components/Header";
 import Route from "./components/Route";
 import Search from "./components/Search";
 import Translate from "./components/Translate";
@@ -41,33 +42,12 @@ const showAccordion = () => {
   }
 };
 
-const showList = () => {
-  if (window.location.pathname === "/list") {
-    return <Search></Search>;
-  }
-};
-
-const showDropdown = () => {
-  if (window.location.pathname === "/dropdown") {
-    return <Dropdown></Dropdown>;
-  }
-};
-
-const showTranslate = () => {
-  if (window.location.pathname === "/translate") {
-    return <Translate></Translate>;
-  }
-};
-
-const showComponent = (route, component) => {
-  return window.location.pathname === route ? component : null;
-};
-
 const App = () => {
   const [selected, setSelected] = useState(options[0]);
 
   return (
     <div>
+      <Header></Header>
       <Route path="/">
         <Accordion items={items}></Accordion>
       </Route>
